@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Sustentabilidade 🧠</title>
+    <style>
+        :root {
+            --primary: #46178f;
+            --secondary: #25076b;
+            --correct: #26890c;
+            --incorrect: #e21b3c;
+            --neutral: #1368ce;
+            --warning: #d89e00;
+            --light: #f2f2f2;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--light);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .quiz-container {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+            width: 100%;
+            max-width: 800px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Top Bar */
+        .quiz-header {
+            background: var(--primary);
+            color: white;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .timer-badge {
+            background: var(--warning);
+            color: black;
+            font-weight: bold;
+            font-size: 1.5rem;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: 4px solid white;
+        }
+
+        /* Progress Bar */
+        .progress-container {
+            background: #e0e0e0;
+            height: 12px;
+            width: 100%;
+        }
+
+        .progress-bar {
+            background: #107c41;
+            height: 100%;
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        /* Screen States */
+        .screen {
+            padding: 30px;
+            display: none;
+        }
+
+        .screen.active {
+            display: block;
+        }
+
+        /* Start Screen */
+        .start-screen {
+            text-align: center;
+        }
+
+        input[type="text"] {
+            width: 80%;
+            padding: 12px;
+            margin: 20px 0;
+            border: 2px solid #ccc;
+            border-radius: 6px;
+            font-size: 1rem;
+        }
+
+        /* Question Screen */
+        .question-text {
+            font-size: 1.6rem;
+            color: var(--secondary);
+            margin-bottom: 30px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .alternatives-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 100%);
+            gap: 15px;
+        }
+
+        /* Kahoot Style Grid layout adjustments */
+        @media(min-width: 600px) {
+            .alternatives-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        .btn-alt {
+            border: none;
+            color: white;
+            padding: 20px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: transform 0.1s, filter 0.2s;
+            text-align: left;
+            box-shadow: 0 4px 0 rgba(0,0,0,0.2);
+        }
+
+        .btn-alt:hover {
+            filter: brightness(1.1);
+        }
+
+        .btn-alt:active {
+            transform: translateY(4px);
+            box-shadow: none;
+        }
+
+        /* Kahoot Colors */
+        .btn-alt:nth-child(1) { background-color: #e21b3c; }
+        .btn-alt:nth-child(2) { background-color: #1368ce; }
+        .btn-alt:nth-child(3) { background-color: #d89e00; }
+        .btn-alt:nth-child(4) { background-color: #26890c; }
+
+        /* Global Utility Buttons */
+        .btn-action {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            border-radius: 6px;
+            cursor: pointer;
+            margin-top: 15px;
+        }
+
+        .btn-action:hover {
+            background: var(--secondary);
+        }
+
+        /* Ranking Board */
+        .ranking-list {
+            list-style: none;
+            margin: 20px 0;
+        }
+
+        .ranking-item {
+            background: #eee;
+            padding: 12px;
+            margin: 8px 0;
+            border-radius: 6px;
+            display: flex;
+            justify-content: space-between;
+            font-weight: bold;
+        }
+
+        .ranking-item:nth-child(1) { background: #ffd700; color: black; }
+        .ranking-item:nth-child(2) { background: #c0c0c0; color: black; }
+        .ranking-item:nth-child(3) { background: #cd7f32; color: white; }
+    </style>
+</head>
+<body>
+
+    <div class="quiz-container">
+        <!-- Topo fixo com cronômetro -->
+        <div class="quiz-header">
+            <h2 id="header-title">EcoQuiz 🌿</h2>
+            <div id="timer" class="timer-badge">20</div>
+        </div>
+
+        <!-- Barra de Progresso -->
+        <div class="progress-container">
+            <div id="progress" class="progress-bar"></div>
+        </div>
+
+        <!-- Tela Inicial -->
+        <div id="start-screen" class="screen active">
+            <div class="start-screen">
+                <h3>Bem-vindo ao Kahoot da Sustentabilidade!</h3>
+                <p style="margin-top: 10px; color: #555;">Responda rápido para ganhar mais pontos.</p>
+                <input type="text" id="username" placeholder="Digite seu apelido..." maxlength="15">
+                <br>
+                <button class="btn-action" id="btn-start">Jogar PIN</button>
+            </div>
+        </div>
+
+        <!-- Tela de Pergunta -->
+        <div id="question-screen" class="screen">
+            <p id="question-text" class="question-text">Texto da Pergunta</p>
+            <div class="alternatives-grid" id="alternatives-container">
+                <!-- Inserido dinamicamente via JS -->
+            </div>
+        </div>
+
+        <!-- Tela de Feedback Rápido -->
+        <div id="feedback-screen" class="screen" style="text-align: center;">
+            <h1 id="feedback-title">Correto!</h1>
+            <p id="feedback-points" style="font-size: 1.2rem; margin: 15px 0;"></p>
+            <button class="btn-action" id="btn-next">Avançar</button>
+        </div>
+
+        <!-- Tela de Ranking / Fim -->
+        <div id="ranking-screen" class="screen">
+            <h3 style="text-align: center; font-size: 1.5rem;">Pódio Final 🏆</h3>
+            <ul id="ranking-list" class="ranking-list">
+                <!-- Inserido dinamicamente via JS -->
+            </ul>
+            <div style="text-align: center;">
+                <button class="btn-action" id="btn-restart">Jogar Novamente</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // --- 1. BANCO DE DADOS (Objetos e Arrays) ---
+        const QUESTIONS_BANK = [
+            {
+                question: "Quanto tempo uma garrafa PET leva para se decompor no meio ambiente?",
+                options: ["Cerca de 50 anos", "Mais de 400 anos", "10 anos", "Não se decompõe"],
+                correct: 1
+            },
+            {
+                question: "Qual dos 5 Rs foca em reduzir a geração de novos resíduos antes da compra?",
+                options: ["Reciclar", "Reutilizar", "Recusar", "Repensar"],
+                correct: 2
+            },
+            {
+                question: "Qual setor consome a maior quantidade de água potável no mundo?",
+                options: ["Indústria Têxtil", "Uso Doméstico", "Agricultura", "Pecuária"],
+                correct: 2
+            },
+            {
+                question: "Qual gás é o principal responsável pelo agravamento do Efeito Estufa?",
+                options: ["Oxigênio", "Dióxido de Carbono (CO2)", "Metano (CH4)", "Nitrogênio"],
+                correct: 1
+            },
+            {
+                question: "O que significa 'Consumo Consciente'?",
+                options: ["Comprar apenas itens caros", "Consumir produtos biodegradáveis apenas", "Comprar o necessário avaliando impactos", "Evitar totalmente o comércio"],
+                correct: 2
+            }
+        ];
+
+        // --- 2. ESTADO DO JOGO ---
+        let currentQuestions = [];
+        let currentQuestionIndex = 0;
+        let score = 0;
+        let timerInterval = null;
+        let timeLeft = 20;
+        let username = "Jogador";
+
+        // Mock de Ranking Existente
+        let leaderboard = [
+            { name: "EcoGuerreiro", score: 3800 },
+            { name: "Greta_T", score: 3100 },
+            { name: "PlanteArvores", score: 2400 }
+        ];
+
+        // --- 3. SELETORES DOM (Manipulação de Tela) ---
+        const screens = {
+            start: document.getElementById('start-screen'),
+            question: document.getElementById('question-screen'),
+            feedback: document.getElementById('feedback-screen'),
+            ranking: document.getElementById('ranking-screen')
+        };
+
+        const elements = {
+            timer: document.getElementById('timer'),
+            progress: document.getElementById('progress'),
+            questionText: document.getElementById('question-text'),
+            alternativesContainer: document.getElementById('alternatives-container'),
+            usernameInput: document.getElementById('username'),
+            feedbackTitle: document.getElementById('feedback-title'),
+            feedbackPoints: document.getElementById('feedback-points'),
+            rankingList: document.getElementById('ranking-list')
+        };
+
+        // --- 4. FLUXO DE TELAS ---
+        function changeScreen(screenName) {
+            Object.values(screens).forEach(screen => screen.classList.remove('active'));
+            screens[screenName].classList.add('active');
+
+            if (screenName === 'question') {
+                elements.timer.style.visibility = 'visible';
+            } else if (screenName === 'start' || screenName === 'ranking' || screenName === 'feedback') {
+                elements.timer.style.visibility = 'hidden';
+            }
+        }
+
+        // --- 5. LÓGICA DO QUIZ ---
+        function initQuiz() {
+            username = elements.usernameInput.value.trim() || "Jogador Anonimo";
+            // Clonando e embaralhando o array original de perguntas
+            currentQuestions = [...QUESTIONS_BANK].sort(() => Math.random() - 0.5);
+            currentQuestionIndex = 0;
+            score = 0;
+            
+            showQuestion();
+        }
+
+        function showQuestion() {
+            changeScreen('question');
+            resetTimer();
+
+            const q = currentQuestions[currentQuestionIndex];
+            elements.questionText.innerText = q.question;
+            
+            // Atualizar Barra de Progresso
+            const percent = ((currentQuestionIndex) / currentQuestions.length) * 100;
+            elements.progress.style.width = `${percent}%`;
+
+            // Renderizar as alternativas usando manipulação de DOM
+            elements.alternativesContainer.innerHTML = '';
+            q.options.forEach((opt, index) => {
+                const button = document.createElement('button');
+                button.classList.add('btn-alt');
+                button.innerText = opt;
+                // Evento de clique na alternativa
+                button.addEventListener('click', () => evaluateAnswer(index));
+                elements.alternativesContainer.appendChild(button);
+            });
+
+            startTimer();
+        }
+
+        // --- 6. SISTEMA DE CRONÔMETRO ---
+        function startTimer() {
+            timeLeft = 20;
+            elements.timer.innerText = timeLeft;
+            
+            timerInterval = setInterval(() => {
+                timeLeft--;
+                elements.timer.innerText = timeLeft;
+                
+                if (timeLeft <= 0) {
+                    clearInterval(timerInterval);
+                    evaluateAnswer(-1); // Tempo esgotado conta como erro
+                }
+            }, 1000);
+        }
+
+        function resetTimer() {
+            clearInterval(timerInterval);
+        }
+
+        // --- 7. AVALIAÇÃO DE RESPOSTAS (Sistema Kahoot) ---
+        function evaluateAnswer(selectedIndex) {
+            resetTimer();
+            const q = currentQuestions[currentQuestionIndex];
+            let pointsEarned = 0;
+            let isCorrect = selectedIndex === q.correct;
+
+            if (isCorrect) {
+                // Estilo Kahoot: Mais rápido respondeu = Mais pontos ganha (Max: 1000, Min: 500)
+                pointsEarned = Math.round(500 + (timeLeft / 20) * 500);
+                score += pointsEarned;
+                
+                elements.feedbackTitle.innerText = "Resposta Correta! 🎉";
+                elements.feedbackTitle.style.color = "var(--correct)";
+                elements.feedbackPoints.innerText = `+${pointsEarned} pontos (Tempo restante: ${timeLeft}s)`;
+            } else {
+                elements.feedbackTitle.innerText = selectedIndex === -1 ? "Tempo Esgotado! ⏰" : "Resposta Incorreta! ❌";
+                elements.feedbackTitle.style.color = "var(--incorrect)";
+                elements.feedbackPoints.innerText = `A resposta certa era: ${q.options[q.correct]}`;
+            }
+
+            changeScreen('feedback');
+        }
+
+        function nextStep() {
+            currentQuestionIndex++;
+            if (currentQuestionIndex < currentQuestions.length) {
+                showQuestion();
+            } else {
+                showRanking();
+            }
+        }
+
+        // --- 8. RANKING (Ordenação de Objetos) ---
+        function showRanking() {
+            elements.progress.style.width = `100%`;
+            changeScreen('ranking');
+
+            // Salva dados do jogador atual no array global
+            leaderboard.push({ name: username, score: score });
+
+            // Ordena o ranking baseado no score (Do maior para o menor)
+            leaderboard.sort((a, b) => b.score - a.score);
+
+            // Renderiza os itens de ranking no HTML
+            elements.rankingList.innerHTML = '';
+            leaderboard.forEach((player, index) => {
+                const li = document.createElement('li');
+                li.classList.add('ranking-item');
+                li.innerHTML = `<span>${index + 1}º ${player.name}</span> <span>${player.score} pts</span>`;
+                elements.rankingList.appendChild(li);
+            });
+        }
+
+        // --- 9. ESCUTA DE EVENTOS ---
+        document.getElementById('btn-start').addEventListener('click', initQuiz);
+        document.getElementById('btn-next').addEventListener('click', nextStep);
+        document.getElementById('btn-restart').addEventListener('click', () => changeScreen('start'));
+
+    </script>
+</body>
+</html>
