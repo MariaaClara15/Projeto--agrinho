@@ -68,3 +68,29 @@ function novoDesafio() {
 
   atualizarPontuacao();
 }
+.avatares {
+  display: flex;
+  gap: 15px;
+  margin-top: 15px;
+}
+
+.avatar-opcao {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: 0.3s;
+  border: 3px solid transparent;
+}
+
+.avatar-opcao:hover {
+  transform: scale(1.1);
+  border-color: #2d6a4f;
+}
+
+.avatar-principal {
+  width: 150px;
+  margin-top: 20px;
+  border-radius: 50%;
+  border: 5px solid #2d6a4f;
+}
