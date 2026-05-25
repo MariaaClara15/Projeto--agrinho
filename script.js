@@ -64,3 +64,20 @@ function trocarAvatar(imagem) {
 
   atualizarPontuacao();
 }
+function atualizarPontuacao() {
+
+  document.getElementById("pontuacao").innerText =
+    pontos + " pontos";
+
+  let nivel = "🌱 Iniciante Verde";
+
+  if (pontos >= 50) {
+    nivel = "🌿 Guardião Ambiental";
+  }
+
+  if (pontos >= 100) {
+    nivel = "🌍 Herói da Natureza";
+  }
+
+  document.getElementById("nivel").innerText = nivel;
+}
