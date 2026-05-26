@@ -120,4 +120,57 @@
 
 </section>
 <p id="nivel">🌱 Iniciante Verde</p>
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+
+  import {
+    getAuth,
+    createUserWithEmailAndPassword,
+    signInWithEmailAndPassword,
+    signOut
+  } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+  const firebaseConfig = {
+    apiKey: "SUA_API_KEY",
+    authDomain: "SEU_PROJETO.firebaseapp.com",
+    projectId: "SEU_ID",
+    storageBucket: "SEU_BUCKET",
+    messagingSenderId: "XXXX",
+    appId: "XXXX"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+
+  // Cadastro
+  window.cadastrar = () => {
+    const email = document.getElementById("email").value;
+    const senha = document.getElementById("senha").value;
+
+    createUserWithEmailAndPassword(auth, email, senha)
+      .then(() => alert("Usuário criado!"))
+      .catch((erro) => alert(erro.message));
+  };
+
+  // Login
+  window.login = () => {
+    const email = document.getElementById("email").value;
+    const senha = document.getElementById("senha").value;
+
+    signInWithEmailAndPassword(auth, email, senha)
+      .then(() => alert("Login realizado!"))
+      .catch((erro) => alert(erro.message));
+  };
+
+  // Logout
+  window.logout = () => {
+    signOut(auth);
+  };
+</script>
+<input type="email" id="email" placeholder="Email">
+<input type="password" id="senha" placeholder="Senha">
+
+<button onclick="cadastrar()">Cadastrar</button>
+<button onclick="login()">Entrar</button>
+<button onclick="logout()">Sair</button>
 </html>
