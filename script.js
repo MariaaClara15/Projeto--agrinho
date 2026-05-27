@@ -81,3 +81,43 @@ function atualizarPontuacao() {
 
   document.getElementById("nivel").innerText = nivel;
 }
+import { Canvas, useFrame } from "@react-three/fiber";
+import { Sphere, Stars } from "@react-three/drei";
+import { useRef } from "react";
+import * as THREE from "three";
+
+function Earth() {
+  const earthRef = useRef();
+
+  useFrame(() => {
+    earthRef.current.rotation.y += 0.002;
+  });
+
+  return (
+    <Sphere ref={earthRef} args={[2, 64, 64]}>
+      <meshStandardMaterial
+        color="#2E7D32"
+        emissive="#39FF88"
+        roughness={0.7}
+        metalness={0.2}
+      />
+    </Sphere>
+  );
+}
+
+export default function Scene() {
+  return (
+    <Canvas camera={{ position: [0, 0, 6] }}>
+      <ambientLight intensity={0.5} />
+
+      <directionalLight
+        position={[5, 5, 5]}
+        intensity={2}
+      />
+
+      <Stars radius={100} depth={50} count={5000} factor={4} />
+
+      <Earth />
+    </Canvas>
+  );
+}
