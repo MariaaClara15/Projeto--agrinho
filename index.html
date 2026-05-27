@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>EcoTech - Agro Forte</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <!-- THREE JS -->
+  <title>EcoTech</title>
+
   <script src="https://cdn.jsdelivr.net/npm/three@0.152.2/build/three.min.js"></script>
 
   <style>
@@ -14,39 +14,53 @@
       margin:0;
       padding:0;
       box-sizing:border-box;
-      font-family:Arial, sans-serif;
+      font-family:Arial,sans-serif;
     }
 
     body{
-      background:#081C15;
+      overflow:hidden;
+      background:#000;
       color:white;
-      overflow-x:hidden;
     }
 
     canvas{
       position:fixed;
       top:0;
       left:0;
+      width:100%;
+      height:100%;
       z-index:-1;
     }
 
-    header{
+    .overlay{
+      position:absolute;
+      width:100%;
       height:100vh;
+
       display:flex;
+      flex-direction:column;
       justify-content:center;
       align-items:center;
-      flex-direction:column;
+
+      background:
+      linear-gradient(
+        rgba(0,0,0,0.4),
+        rgba(0,0,0,0.6)
+      );
+
       text-align:center;
       padding:20px;
     }
 
     h1{
-      font-size:70px;
+      font-size:80px;
       color:#39FF88;
-      text-shadow:0 0 20px #39FF88;
+
+      text-shadow:
+      0 0 20px #39FF88;
     }
 
-    h2{
+    p{
       margin-top:20px;
       font-size:28px;
       max-width:800px;
@@ -54,9 +68,11 @@
       color:#ddd;
     }
 
-    .btn{
+    button{
       margin-top:40px;
+
       padding:16px 40px;
+
       border:none;
       border-radius:14px;
 
@@ -70,94 +86,26 @@
       color:white;
       font-size:18px;
       font-weight:bold;
+
       cursor:pointer;
 
       transition:0.3s;
     }
 
-    .btn:hover{
+    button:hover{
       transform:scale(1.05);
 
       box-shadow:
-      0 0 30px #39FF88;
-    }
-
-    section{
-      padding:100px 10%;
-    }
-
-    .cards{
-      display:grid;
-      grid-template-columns:
-      repeat(auto-fit,minmax(250px,1fr));
-
-      gap:30px;
-      margin-top:50px;
-    }
-
-    .card{
-      background:rgba(255,255,255,0.08);
-
-      backdrop-filter:blur(10px);
-
-      border:1px solid rgba(255,255,255,0.1);
-
-      border-radius:20px;
-
-      padding:30px;
-
-      transition:0.4s;
-    }
-
-    .card:hover{
-      transform:translateY(-10px);
-
-      box-shadow:
-      0 0 25px rgba(57,255,136,0.4);
-    }
-
-    .card h3{
-      color:#39FF88;
-      margin-bottom:15px;
-      font-size:24px;
-    }
-
-    .stats{
-      display:flex;
-      justify-content:center;
-      flex-wrap:wrap;
-      gap:40px;
-      margin-top:50px;
-    }
-
-    .stat{
-      text-align:center;
-    }
-
-    .stat h4{
-      font-size:50px;
-      color:#39FF88;
-    }
-
-    .stat p{
-      color:#ccc;
-      margin-top:10px;
-    }
-
-    footer{
-      padding:40px;
-      text-align:center;
-      background:#0F172A;
-      color:#aaa;
+      0 0 25px #39FF88;
     }
 
     @media(max-width:768px){
 
       h1{
-        font-size:45px;
+        font-size:50px;
       }
 
-      h2{
+      p{
         font-size:22px;
       }
 
@@ -168,102 +116,28 @@
 
 <body>
 
-  <!-- HERO -->
+  <!-- TEXTO -->
 
-  <header>
+  <div class="overlay">
 
     <h1>EcoTech</h1>
 
-    <h2>
+    <p>
       Agro forte, futuro sustentável.
       Equilíbrio entre produção e meio ambiente.
-    </h2>
+    </p>
 
-    <button class="btn">
-      Conheça a Tecnologia
+    <button>
+      Explorar Tecnologia
     </button>
 
-  </header>
-
-  <!-- SOBRE -->
-
-  <section>
-
-    <h1 style="font-size:50px;">
-      Agricultura Inteligente
-    </h1>
-
-    <div class="cards">
-
-      <div class="card">
-        <h3>🌱 Sustentabilidade</h3>
-
-        <p>
-          Redução do impacto ambiental com
-          tecnologia avançada e monitoramento inteligente.
-        </p>
-      </div>
-
-      <div class="card">
-        <h3>📡 Monitoramento</h3>
-
-        <p>
-          Sensores e dados em tempo real para
-          aumentar produtividade no campo.
-        </p>
-      </div>
-
-      <div class="card">
-        <h3>☀️ Energia Limpa</h3>
-
-        <p>
-          Soluções sustentáveis com energia
-          renovável para o agronegócio moderno.
-        </p>
-      </div>
-
-    </div>
-
-  </section>
-
-  <!-- ESTATÍSTICAS -->
-
-  <section>
-
-    <h1 style="text-align:center;font-size:50px;">
-      Impacto Sustentável
-    </h1>
-
-    <div class="stats">
-
-      <div class="stat">
-        <h4>+85%</h4>
-        <p>Eficiência Agrícola</p>
-      </div>
-
-      <div class="stat">
-        <h4>-40%</h4>
-        <p>Consumo de Água</p>
-      </div>
-
-      <div class="stat">
-        <h4>+1200</h4>
-        <p>Áreas Monitoradas</p>
-      </div>
-
-    </div>
-
-  </section>
-
-  <!-- FOOTER -->
-
-  <footer>
-    © 2026 EcoTech - Futuro Sustentável
-  </footer>
+  </div>
 
   <!-- PLANETA 3D -->
 
   <script>
+
+    // CENA
 
     const scene = new THREE.Scene();
 
@@ -277,7 +151,6 @@
 
     const renderer =
     new THREE.WebGLRenderer({
-      alpha:true,
       antialias:true
     });
 
@@ -290,7 +163,17 @@
       renderer.domElement
     );
 
-    // PLANETA
+    // TEXTURA TERRA
+
+    const textureLoader =
+    new THREE.TextureLoader();
+
+    const earthTexture =
+    textureLoader.load(
+      "https://threejs.org/examples/textures/planets/earth_atmos_2048.jpg"
+    );
+
+    // GEOMETRIA
 
     const geometry =
     new THREE.SphereGeometry(
@@ -301,10 +184,7 @@
 
     const material =
     new THREE.MeshStandardMaterial({
-      color:0x2E7D32,
-      emissive:0x39FF88,
-      roughness:0.5,
-      metalness:0.2
+      map:earthTexture
     });
 
     const earth =
@@ -323,17 +203,19 @@
       2
     );
 
-    light.position.set(5,5,5);
+    light.position.set(5,3,5);
 
     scene.add(light);
 
     const ambient =
     new THREE.AmbientLight(
       0xffffff,
-      0.5
+      0.4
     );
 
     scene.add(ambient);
+
+    // POSIÇÃO CAMERA
 
     camera.position.z = 5;
 
@@ -342,7 +224,7 @@
     const starsGeometry =
     new THREE.BufferGeometry();
 
-    const starsCount = 5000;
+    const starsCount = 10000;
 
     const positions = [];
 
@@ -359,6 +241,7 @@
       positions.push(
         (Math.random()-0.5)*200
       );
+
     }
 
     starsGeometry.setAttribute(
@@ -389,9 +272,9 @@
 
       requestAnimationFrame(animate);
 
-      earth.rotation.y += 0.003;
+      earth.rotation.y += 0.002;
 
-      stars.rotation.y += 0.0005;
+      stars.rotation.y += 0.0002;
 
       renderer.render(
         scene,
@@ -404,7 +287,7 @@
     // RESPONSIVO
 
     window.addEventListener(
-      'resize',
+      "resize",
       ()=>{
 
         camera.aspect =
