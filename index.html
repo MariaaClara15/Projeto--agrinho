@@ -3,9 +3,13 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>EcoTech Login</title>
+  <title>EcoTech - Agro Forte</title>
+
+  <!-- THREE JS -->
+  <script src="https://cdn.jsdelivr.net/npm/three@0.152.2/build/three.min.js"></script>
 
   <style>
+
     *{
       margin:0;
       padding:0;
@@ -14,91 +18,47 @@
     }
 
     body{
+      background:#081C15;
+      color:white;
+      overflow-x:hidden;
+    }
+
+    canvas{
+      position:fixed;
+      top:0;
+      left:0;
+      z-index:-1;
+    }
+
+    header{
       height:100vh;
       display:flex;
       justify-content:center;
       align-items:center;
-      background:
-      linear-gradient(
-        135deg,
-        #081C15,
-        #1B4332,
-        #0F172A
-      );
-      overflow:hidden;
-    }
-
-    /* Fundo animado */
-    body::before{
-      content:"";
-      position:absolute;
-      width:200%;
-      height:200%;
-      background:
-      radial-gradient(#39FF88 1px, transparent 1px);
-      background-size:40px 40px;
-      animation:moveBg 20s linear infinite;
-      opacity:0.15;
-    }
-
-    @keyframes moveBg{
-      from{
-        transform:translateY(0);
-      }
-      to{
-        transform:translateY(-50px);
-      }
-    }
-
-    .login-box{
-      position:relative;
-      width:350px;
-      padding:40px;
-      border-radius:20px;
-
-      background:rgba(255,255,255,0.08);
-      backdrop-filter:blur(12px);
-
-      border:1px solid rgba(255,255,255,0.1);
-
-      box-shadow:
-      0 0 30px rgba(57,255,136,0.2);
-
-      color:white;
-      z-index:1;
-    }
-
-    .login-box h1{
+      flex-direction:column;
       text-align:center;
-      margin-bottom:30px;
+      padding:20px;
+    }
+
+    h1{
+      font-size:70px;
       color:#39FF88;
+      text-shadow:0 0 20px #39FF88;
     }
 
-    .input-group{
-      margin-bottom:20px;
+    h2{
+      margin-top:20px;
+      font-size:28px;
+      max-width:800px;
+      line-height:1.5;
+      color:#ddd;
     }
 
-    .input-group input{
-      width:100%;
-      padding:14px;
+    .btn{
+      margin-top:40px;
+      padding:16px 40px;
       border:none;
-      outline:none;
-      border-radius:12px;
-
-      background:rgba(255,255,255,0.1);
-      color:white;
-      font-size:16px;
-    }
-
-    .input-group input::placeholder{
-      color:#ccc;
-    }
-
-    button{
-      width:100%;
-      padding:14px;
-      border:none;
-      border-radius:12px;
+      border-radius:14px;
 
       background:
       linear-gradient(
@@ -108,105 +68,358 @@
       );
 
       color:white;
-      font-size:16px;
+      font-size:18px;
       font-weight:bold;
       cursor:pointer;
 
       transition:0.3s;
     }
 
-    button:hover{
-      transform:scale(1.03);
+    .btn:hover{
+      transform:scale(1.05);
 
       box-shadow:
-      0 0 20px #39FF88;
+      0 0 30px #39FF88;
     }
 
-    .error{
-      margin-top:15px;
-      color:#ff6b6b;
-      text-align:center;
+    section{
+      padding:100px 10%;
     }
 
-    .success{
-      margin-top:15px;
+    .cards{
+      display:grid;
+      grid-template-columns:
+      repeat(auto-fit,minmax(250px,1fr));
+
+      gap:30px;
+      margin-top:50px;
+    }
+
+    .card{
+      background:rgba(255,255,255,0.08);
+
+      backdrop-filter:blur(10px);
+
+      border:1px solid rgba(255,255,255,0.1);
+
+      border-radius:20px;
+
+      padding:30px;
+
+      transition:0.4s;
+    }
+
+    .card:hover{
+      transform:translateY(-10px);
+
+      box-shadow:
+      0 0 25px rgba(57,255,136,0.4);
+    }
+
+    .card h3{
       color:#39FF88;
+      margin-bottom:15px;
+      font-size:24px;
+    }
+
+    .stats{
+      display:flex;
+      justify-content:center;
+      flex-wrap:wrap;
+      gap:40px;
+      margin-top:50px;
+    }
+
+    .stat{
       text-align:center;
     }
+
+    .stat h4{
+      font-size:50px;
+      color:#39FF88;
+    }
+
+    .stat p{
+      color:#ccc;
+      margin-top:10px;
+    }
+
+    footer{
+      padding:40px;
+      text-align:center;
+      background:#0F172A;
+      color:#aaa;
+    }
+
+    @media(max-width:768px){
+
+      h1{
+        font-size:45px;
+      }
+
+      h2{
+        font-size:22px;
+      }
+
+    }
+
   </style>
 </head>
 
 <body>
 
-  <div class="login-box">
+  <!-- HERO -->
+
+  <header>
+
     <h1>EcoTech</h1>
 
-    <div class="input-group">
-      <input
-        type="email"
-        id="email"
-        placeholder="Digite seu email"
-      />
-    </div>
+    <h2>
+      Agro forte, futuro sustentável.
+      Equilíbrio entre produção e meio ambiente.
+    </h2>
 
-    <div class="input-group">
-      <input
-        type="password"
-        id="password"
-        placeholder="Digite sua senha"
-      />
-    </div>
-
-    <button onclick="login()">
-      Entrar
+    <button class="btn">
+      Conheça a Tecnologia
     </button>
 
-    <p id="message"></p>
-  </div>
+  </header>
+
+  <!-- SOBRE -->
+
+  <section>
+
+    <h1 style="font-size:50px;">
+      Agricultura Inteligente
+    </h1>
+
+    <div class="cards">
+
+      <div class="card">
+        <h3>🌱 Sustentabilidade</h3>
+
+        <p>
+          Redução do impacto ambiental com
+          tecnologia avançada e monitoramento inteligente.
+        </p>
+      </div>
+
+      <div class="card">
+        <h3>📡 Monitoramento</h3>
+
+        <p>
+          Sensores e dados em tempo real para
+          aumentar produtividade no campo.
+        </p>
+      </div>
+
+      <div class="card">
+        <h3>☀️ Energia Limpa</h3>
+
+        <p>
+          Soluções sustentáveis com energia
+          renovável para o agronegócio moderno.
+        </p>
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- ESTATÍSTICAS -->
+
+  <section>
+
+    <h1 style="text-align:center;font-size:50px;">
+      Impacto Sustentável
+    </h1>
+
+    <div class="stats">
+
+      <div class="stat">
+        <h4>+85%</h4>
+        <p>Eficiência Agrícola</p>
+      </div>
+
+      <div class="stat">
+        <h4>-40%</h4>
+        <p>Consumo de Água</p>
+      </div>
+
+      <div class="stat">
+        <h4>+1200</h4>
+        <p>Áreas Monitoradas</p>
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- FOOTER -->
+
+  <footer>
+    © 2026 EcoTech - Futuro Sustentável
+  </footer>
+
+  <!-- PLANETA 3D -->
 
   <script>
-    function login(){
 
-      const email =
-      document.getElementById("email").value;
+    const scene = new THREE.Scene();
 
-      const password =
-      document.getElementById("password").value;
+    const camera =
+    new THREE.PerspectiveCamera(
+      75,
+      window.innerWidth/window.innerHeight,
+      0.1,
+      1000
+    );
 
-      const message =
-      document.getElementById("message");
+    const renderer =
+    new THREE.WebGLRenderer({
+      alpha:true,
+      antialias:true
+    });
 
-      // LOGIN EXEMPLO
-      const correctEmail =
-      "admin@ecotech.com";
+    renderer.setSize(
+      window.innerWidth,
+      window.innerHeight
+    );
 
-      const correctPassword =
-      "123456";
+    document.body.appendChild(
+      renderer.domElement
+    );
 
-      if(
-        email === correctEmail &&
-        password === correctPassword
-      ){
+    // PLANETA
 
-        message.className = "success";
+    const geometry =
+    new THREE.SphereGeometry(
+      2,
+      64,
+      64
+    );
 
-        message.innerText =
-        "Login realizado com sucesso!";
+    const material =
+    new THREE.MeshStandardMaterial({
+      color:0x2E7D32,
+      emissive:0x39FF88,
+      roughness:0.5,
+      metalness:0.2
+    });
 
-        // REDIRECIONAR
-        setTimeout(() => {
-          window.location.href = "home.html";
-        }, 1500);
+    const earth =
+    new THREE.Mesh(
+      geometry,
+      material
+    );
 
-      } else {
+    scene.add(earth);
 
-        message.className = "error";
+    // LUZ
 
-        message.innerText =
-        "Email ou senha incorretos.";
+    const light =
+    new THREE.PointLight(
+      0xffffff,
+      2
+    );
+
+    light.position.set(5,5,5);
+
+    scene.add(light);
+
+    const ambient =
+    new THREE.AmbientLight(
+      0xffffff,
+      0.5
+    );
+
+    scene.add(ambient);
+
+    camera.position.z = 5;
+
+    // ESTRELAS
+
+    const starsGeometry =
+    new THREE.BufferGeometry();
+
+    const starsCount = 5000;
+
+    const positions = [];
+
+    for(let i=0;i<starsCount;i++){
+
+      positions.push(
+        (Math.random()-0.5)*200
+      );
+
+      positions.push(
+        (Math.random()-0.5)*200
+      );
+
+      positions.push(
+        (Math.random()-0.5)*200
+      );
+    }
+
+    starsGeometry.setAttribute(
+      'position',
+      new THREE.Float32BufferAttribute(
+        positions,
+        3
+      )
+    );
+
+    const starsMaterial =
+    new THREE.PointsMaterial({
+      color:0xffffff,
+      size:0.1
+    });
+
+    const stars =
+    new THREE.Points(
+      starsGeometry,
+      starsMaterial
+    );
+
+    scene.add(stars);
+
+    // ANIMAÇÃO
+
+    function animate(){
+
+      requestAnimationFrame(animate);
+
+      earth.rotation.y += 0.003;
+
+      stars.rotation.y += 0.0005;
+
+      renderer.render(
+        scene,
+        camera
+      );
+    }
+
+    animate();
+
+    // RESPONSIVO
+
+    window.addEventListener(
+      'resize',
+      ()=>{
+
+        camera.aspect =
+        window.innerWidth/window.innerHeight;
+
+        camera.updateProjectionMatrix();
+
+        renderer.setSize(
+          window.innerWidth,
+          window.innerHeight
+        );
 
       }
-    }
+    );
+
   </script>
 
 </body>
