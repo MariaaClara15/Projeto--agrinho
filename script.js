@@ -1,5 +1,10 @@
 let avatarEscolhido = "";
 let pontos = 0;
+let perguntaAtual = 0;
+
+/* =======================
+   DICAS
+======================= */
 
 const dicas = [
 
@@ -26,57 +31,97 @@ const dicas = [
 ];
 
 document.getElementById("dica").innerHTML =
-dicas[Math.floor(Math.random()*dicas.length)];
+dicas[Math.floor(Math.random() * dicas.length)];
+
+/* =======================
+   DESAFIOS
+======================= */
+
+const desafios = [
+
+"💧 Ficar 1 dia sem desperdiçar água",
+
+"🌳 Plantar uma muda de árvore",
+
+"♻️ Separar lixo reciclável durante uma semana",
+
+"💡 Apagar as luzes ao sair dos cômodos",
+
+"🚫 Utilizar menos plástico por 3 dias"
+
+];
+
+document.getElementById("desafio").innerHTML =
+desafios[Math.floor(Math.random() * desafios.length)];
+
+/* =======================
+   AVATAR
+======================= */
 
 function selecionarAvatar(img){
 
 document
 .querySelectorAll(".avatares img")
-.forEach(a=>a.classList.remove("selecionado"));
+.forEach(a => a.classList.remove("selecionado"));
 
 img.classList.add("selecionado");
 
 avatarEscolhido = img.src;
+
 }
+
+/* =======================
+   LOGIN
+======================= */
 
 function entrar(){
 
 let nome =
 document.getElementById("nome").value;
 
-if(nome == "" || avatarEscolhido==""){
+if(nome === "" || avatarEscolhido === ""){
 
 alert("Digite seu nome e escolha um avatar!");
 
 return;
-}
-
-document.getElementById("login")
-.style.display="none";
-
-document.getElementById("site")
-.style.display="block";
-
-document.getElementById("boasVindas")
-.innerHTML =
-"Bem-vindo(a), "+nome+"!";
-
-document.getElementById("avatarUsuario")
-.src = avatarEscolhido;
 
 }
+
+document.getElementById("login").style.display = "none";
+
+document.getElementById("site").style.display = "block";
+
+document.getElementById("boasVindas").innerHTML =
+"Bem-vindo(a), " + nome + "!";
+
+document.getElementById("avatarUsuario").src =
+avatarEscolhido;
+
+}
+
+/* =======================
+   CALCULADORA DE ÁGUA
+======================= */
 
 function calcularAgua(){
 
 let banho =
 document.getElementById("banho").value;
 
+if(banho === ""){
+
+alert("Digite os minutos do banho.");
+
+return;
+
+}
+
 let litros = banho * 9;
 
-document.getElementById("resultadoAgua")
-.innerHTML =
-"Você gastou aproximadamente "
-+ litros +
+document.getElementById("resultadoAgua").innerHTML =
+
+"💧 Você gastou aproximadamente " +
+litros +
 " litros de água.";
 
 pontos += 10;
@@ -85,38 +130,14 @@ atualizarPontos();
 
 }
 
-function quiz(resposta){
-
-if(resposta == 1){
-
-document.getElementById("resultadoQuiz")
-.innerHTML =
-"✅ Resposta correta!";
-
-pontos += 20;
-
-}else{
-
-document.getElementById("resultadoQuiz")
-.innerHTML =
-"❌ Tente novamente.";
-}
-
-atualizarPontos();
-
-}
-
-function atualizarPontos(){
-
-document.getElementById("pontuacao")
-.innerHTML =
-pontos + " pontos";
-let perguntaAtual = 0;
+/* =======================
+   QUIZ
+======================= */
 
 const perguntas = [
 
 {
-pergunta: "Qual atitude economiza mais água?",
+pergunta:"Qual atitude economiza mais água?",
 opcoes:[
 "Banho de 5 minutos",
 "Lavar calçada com mangueira",
@@ -163,6 +184,26 @@ opcoes:[
 "Queimar lixo"
 ],
 correta:0
+},
+
+{
+pergunta:"Qual animal é importante para a polinização?",
+opcoes:[
+"Abelha",
+"Tubarão",
+"Cobra"
+],
+correta:0
+},
+
+{
+pergunta:"Qual atitude ajuda o planeta?",
+opcoes:[
+"Economizar energia",
+"Desperdiçar água",
+"Jogar lixo na rua"
+],
+correta:0
 }
 
 ];
@@ -171,8 +212,8 @@ function carregarPergunta(){
 
 let p = perguntas[perguntaAtual];
 
-document.getElementById("pergunta")
-.innerHTML = p.pergunta;
+document.getElementById("pergunta").innerHTML =
+p.pergunta;
 
 let respostas = "";
 
@@ -186,8 +227,8 @@ ${opcao}
 
 });
 
-document.getElementById("respostas")
-.innerHTML = respostas;
+document.getElementById("respostas").innerHTML =
+respostas;
 
 }
 
@@ -197,17 +238,16 @@ let p = perguntas[perguntaAtual];
 
 if(indice === p.correta){
 
-document.getElementById("resultadoQuiz")
-.innerHTML =
+document.getElementById("resultadoQuiz").innerHTML =
 "✅ Resposta correta! +20 pontos";
 
 pontos += 20;
 
 }else{
 
-document.getElementById("resultadoQuiz")
-.innerHTML =
-"❌ Resposta incorreta";
+document.getElementById("resultadoQuiz").innerHTML =
+"❌ Resposta incorreta.";
+
 }
 
 perguntaAtual++;
@@ -218,12 +258,11 @@ setTimeout(carregarPergunta,1000);
 
 }else{
 
-document.getElementById("pergunta")
-.innerHTML =
+document.getElementById("pergunta").innerHTML =
 "🎉 Quiz Finalizado!";
 
-document.getElementById("respostas")
-.innerHTML = "";
+document.getElementById("respostas").innerHTML =
+"";
 
 }
 
@@ -231,11 +270,13 @@ atualizarPontos();
 
 }
 
-carregarPergunta();
+/* =======================
+   PONTOS E MEDALHAS
+======================= */
+
 function atualizarPontos(){
 
-document.getElementById("pontuacao")
-.innerHTML =
+document.getElementById("pontuacao").innerHTML =
 pontos + " pontos";
 
 let medalha = "🌱 Iniciante Verde";
@@ -252,25 +293,17 @@ if(pontos >= 150){
 medalha = "🏆 Mestre do Agro Sustentável";
 }
 
-document.getElementById("medalha")
-.innerHTML = medalha;
+document.getElementById("medalha").innerHTML =
+medalha;
 
 }
-const desafios = [
 
-"Ficar 1 dia sem desperdiçar água",
+/* =======================
+   INICIAR QUIZ
+======================= */
 
-"Plantar uma muda de árvore",
+window.onload = function(){
 
-"Separar lixo reciclável durante uma semana",
+carregarPergunta();
 
-"Apagar as luzes ao sair dos cômodos",
-
-"Utilizar menos plástico por 3 dias"
-
-];
-
-document.getElementById("desafio")
-.innerHTML =
-desafios[Math.floor(Math.random()*desafios.length)];
-}
+};
