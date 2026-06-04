@@ -364,3 +364,56 @@ flex-wrap:wrap;
 }
 
 }
+/* ========================= */
+/* ECOBOT */
+/* ========================= */
+
+.mascote{
+
+text-align:center;
+
+margin:15px 0;
+
+}
+
+.mascote img{
+
+width:120px;
+
+transition:.4s;
+
+}
+
+.mascote img:hover{
+
+transform:scale(1.1) rotate(5deg);
+
+}
+
+/* ========================= */
+/* SIMULADOR */
+/* ========================= */
+
+#resultadoSimulador{
+
+margin-top:15px;
+
+font-weight:bold;
+
+line-height:1.8;
+
+}
+
+/* ========================= */
+/* ECOBOT TEXTO */
+/* ========================= */
+
+#falaMascote{
+
+margin-top:10px;
+
+font-size:1rem;
+
+line-height:1.6;
+
+}

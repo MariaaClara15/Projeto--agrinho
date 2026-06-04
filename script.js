@@ -307,3 +307,84 @@ window.onload = function(){
 carregarPergunta();
 
 };
+/* =======================
+   ECOBOT
+======================= */
+
+const mensagensMascote = [
+
+"🌱 Economizar água ajuda o planeta.",
+
+"🐝 As abelhas são essenciais para a agricultura.",
+
+"🚜 O agro sustentável produz e preserva.",
+
+"♻️ Reciclar é cuidar do futuro.",
+
+"💡 Desligue as luzes quando não estiver usando.",
+
+"🌳 Plantar árvores melhora a qualidade do ar.",
+
+"💧 Cada gota de água faz diferença."
+
+];
+
+function novaDica(){
+
+let mensagem = mensagensMascote[
+Math.floor(
+Math.random() * mensagensMascote.length
+)
+];
+
+document.getElementById("falaMascote")
+.innerHTML = mensagem;
+
+}
+
+/* =======================
+   SIMULADOR
+======================= */
+
+function simulador(tipo){
+
+let resultado =
+document.getElementById(
+"resultadoSimulador"
+);
+
+if(tipo === "sustentavel"){
+
+resultado.innerHTML =
+
+"🌱 Excelente escolha!<br><br>" +
+
+"💧 Economia de água: 95%<br>" +
+
+"🚜 Produção agrícola: 90%<br>" +
+
+"🌎 Sustentabilidade: 100%<br><br>" +
+
+"🏆 Você criou uma fazenda sustentável!";
+
+pontos += 30;
+
+}else{
+
+resultado.innerHTML =
+
+"⚠️ Essa opção utiliza mais água.<br><br>" +
+
+"💧 Economia de água: 30%<br>" +
+
+"🚜 Produção agrícola: 70%<br>" +
+
+"🌎 Sustentabilidade: 40%<br><br>" +
+
+"🌱 Tente escolher alternativas mais sustentáveis.";
+
+}
+
+atualizarPontos();
+
+}
