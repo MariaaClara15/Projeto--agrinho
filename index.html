@@ -3,598 +3,123 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EcoTech - Agrinho 2026</title>
 
-<title>EcoTech - Agro Forte</title>
+<link rel="stylesheet" href="style.css">
 
-<script src="https://cdn.jsdelivr.net/npm/three@0.152.2/build/three.min.js"></script>
-
-<style>
-
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-  font-family:Arial,sans-serif;
-}
-
-body{
-  background:#081C15;
-  color:white;
-  overflow-x:hidden;
-}
-
-/* CANVAS 3D */
-
-canvas{
-  position:fixed;
-  top:0;
-  left:0;
-  z-index:-1;
-}
-
-/* NAVBAR */
-
-nav{
-  position:fixed;
-  width:100%;
-  padding:20px 10%;
-
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-
-  background:rgba(0,0,0,0.3);
-  backdrop-filter:blur(10px);
-
-  z-index:1000;
-}
-
-.logo{
-  font-size:30px;
-  font-weight:bold;
-  color:#39FF88;
-}
-
-nav ul{
-  display:flex;
-  gap:30px;
-  list-style:none;
-}
-
-nav a{
-  color:white;
-  text-decoration:none;
-  transition:0.3s;
-}
-
-nav a:hover{
-  color:#39FF88;
-}
-
-/* HERO */
-
-.hero{
-  height:100vh;
-
-  display:flex;
-  justify-content:center;
-  align-items:center;
-
-  text-align:center;
-  padding:20px;
-}
-
-.hero-content{
-  max-width:900px;
-
-  background:rgba(0,0,0,0.35);
-
-  padding:50px;
-  border-radius:30px;
-
-  backdrop-filter:blur(10px);
-}
-
-.hero h1{
-  font-size:80px;
-  color:#39FF88;
-
-  text-shadow:
-  0 0 20px #39FF88;
-}
-
-.hero p{
-  margin-top:25px;
-  font-size:28px;
-  line-height:1.5;
-  color:#ddd;
-}
-
-.btn{
-  margin-top:40px;
-
-  padding:16px 40px;
-
-  border:none;
-  border-radius:14px;
-
-  background:
-  linear-gradient(
-    90deg,
-    #39FF88,
-    #2E7D32
-  );
-
-  color:white;
-  font-size:18px;
-  font-weight:bold;
-
-  cursor:pointer;
-  transition:0.3s;
-}
-
-.btn:hover{
-  transform:scale(1.05);
-
-  box-shadow:
-  0 0 25px #39FF88;
-}
-
-/* SECTIONS */
-
-section{
-  padding:120px 10%;
-}
-
-.section-title{
-  text-align:center;
-  font-size:50px;
-  margin-bottom:60px;
-  color:#39FF88;
-}
-
-/* CARDS */
-
-.cards{
-  display:grid;
-
-  grid-template-columns:
-  repeat(auto-fit,minmax(250px,1fr));
-
-  gap:30px;
-}
-
-.card{
-  background:rgba(255,255,255,0.08);
-
-  border:1px solid rgba(255,255,255,0.1);
-
-  border-radius:20px;
-
-  padding:35px;
-
-  backdrop-filter:blur(10px);
-
-  transition:0.4s;
-}
-
-.card:hover{
-  transform:translateY(-10px);
-
-  box-shadow:
-  0 0 25px rgba(57,255,136,0.5);
-}
-
-.card h3{
-  color:#39FF88;
-  margin-bottom:15px;
-  font-size:24px;
-}
-
-.card p{
-  color:#ddd;
-  line-height:1.6;
-}
-
-/* STATS */
-
-.stats{
-  display:flex;
-  justify-content:center;
-  flex-wrap:wrap;
-  gap:50px;
-}
-
-.stat{
-  text-align:center;
-}
-
-.stat h2{
-  font-size:60px;
-  color:#39FF88;
-}
-
-.stat p{
-  margin-top:10px;
-  color:#ddd;
-}
-
-/* FOOTER */
-
-footer{
-  padding:40px;
-  text-align:center;
-
-  background:#0F172A;
-  color:#aaa;
-}
-
-/* RESPONSIVO */
-
-@media(max-width:768px){
-
-  .hero h1{
-    font-size:50px;
-  }
-
-  .hero p{
-    font-size:22px;
-  }
-
-  nav{
-    flex-direction:column;
-    gap:20px;
-  }
-
-}
-
-</style>
 </head>
-
 <body>
 
-<!-- MENU -->
+<div id="login">
 
-<nav>
+    <h1>🌱 EcoTech</h1>
 
-  <div class="logo">
-    EcoTech
-  </div>
+    <h2>Agro Forte, Futuro Sustentável</h2>
 
-  <ul>
-    <li><a href="#">Início</a></li>
-    <li><a href="#">Tecnologia</a></li>
-    <li><a href="#">Sustentabilidade</a></li>
-    <li><a href="#">Contato</a></li>
-  </ul>
+    <input type="text" id="nome" placeholder="Digite seu nome">
 
-</nav>
+    <h3>Escolha seu avatar</h3>
 
-<!-- HERO -->
+    <div class="avatares">
 
-<section class="hero">
+        <img src="https://cdn-icons-png.flaticon.com/512/4140/4140048.png"
+        onclick="selecionarAvatar(this)">
 
-  <div class="hero-content">
+        <img src="https://cdn-icons-png.flaticon.com/512/4140/4140051.png"
+        onclick="selecionarAvatar(this)">
 
-    <h1>EcoTech</h1>
+        <img src="https://cdn-icons-png.flaticon.com/512/4140/4140061.png"
+        onclick="selecionarAvatar(this)">
 
-    <p>
-      Agro forte, futuro sustentável.
-      Tecnologia inteligente para equilibrar
-      produtividade e meio ambiente.
-    </p>
+    </div>
 
-    <button class="btn">
-      Explorar Soluções
-    </button>
+    <button onclick="entrar()">Entrar</button>
 
-  </div>
+</div>
+
+<div id="site" style="display:none;">
+
+<header>
+
+<h1>🌎 EcoTech</h1>
+
+<p id="boasVindas"></p>
+
+<div id="perfil">
+<img id="avatarUsuario">
+</div>
+
+</header>
+
+<section class="cards">
+
+<div class="card">
+<h2>💧 Calculadora de Água</h2>
+
+<input type="number" id="banho"
+placeholder="Minutos de banho">
+
+<button onclick="calcularAgua()">
+Calcular
+</button>
+
+<p id="resultadoAgua"></p>
+
+</div>
+
+<div class="card">
+
+<h2>🧠 Quiz Sustentável</h2>
+
+<p>
+Qual atitude economiza mais água?
+</p>
+
+<button onclick="quiz(1)">
+Banho de 5 minutos
+</button>
+
+<button onclick="quiz(0)">
+Lavar calçada com mangueira
+</button>
+
+<p id="resultadoQuiz"></p>
+
+</div>
+
+<div class="card">
+
+<h2>🏆 Pontuação</h2>
+
+<p id="pontuacao">
+0 pontos
+</p>
+
+</div>
+
+<div class="card">
+
+<h2>🌿 Dica do Dia</h2>
+
+<p id="dica"></p>
+
+</div>
+
+<div class="card">
+
+<h2>🎯 Desafio da Semana</h2>
+
+<p>
+Fique um dia inteiro sem desperdiçar água.
+</p>
+
+</div>
 
 </section>
 
-<!-- TECNOLOGIA -->
+</div>
 
-<section>
-
-  <h1 class="section-title">
-    Agricultura Inteligente
-  </h1>
-
-  <div class="cards">
-
-    <div class="card">
-      <h3>🌱 Sustentabilidade</h3>
-
-      <p>
-        Soluções ecológicas para reduzir
-        impacto ambiental e preservar recursos.
-      </p>
-    </div>
-
-    <div class="card">
-      <h3>📡 Monitoramento</h3>
-
-      <p>
-        Sensores inteligentes e análise
-        em tempo real para máxima eficiência.
-      </p>
-    </div>
-
-    <div class="card">
-      <h3>☀️ Energia Limpa</h3>
-
-      <p>
-        Integração com energia renovável
-        para um agro mais sustentável.
-      </p>
-    </div>
-
-  </div>
-
-</section>
-
-<!-- ESTATÍSTICAS -->
-
-<section>
-
-  <h1 class="section-title">
-    Impacto Sustentável
-  </h1>
-
-  <div class="stats">
-
-    <div class="stat">
-      <h2>+85%</h2>
-      <p>Eficiência Agrícola</p>
-    </div>
-
-    <div class="stat">
-      <h2>-40%</h2>
-      <p>Consumo de Água</p>
-    </div>
-
-    <div class="stat">
-      <h2>+1200</h2>
-      <p>Áreas Monitoradas</p>
-    </div>
-
-  </div>
-
-</section>
-
-<!-- CONTATO -->
-
-<section>
-
-  <h1 class="section-title">
-    Entre em Contato
-  </h1>
-
-  <div class="cards">
-
-    <div class="card">
-
-      <h3>📧 Email</h3>
-
-      <p>
-        contato@ecotech.com
-      </p>
-
-    </div>
-
-    <div class="card">
-
-      <h3>📞 Telefone</h3>
-
-      <p>
-        +55 (41) 99999-9999
-      </p>
-
-    </div>
-
-    <div class="card">
-
-      <h3>🌍 Localização</h3>
-
-      <p>
-        Curitiba - Paraná
-      </p>
-
-    </div>
-
-  </div>
-
-</section>
-
-<!-- FOOTER -->
-
-<footer>
-  © 2026 EcoTech - Agro Forte Futuro Sustentável
-</footer>
-
-<!-- THREE JS -->
-
-<script>
-
-const scene =
-new THREE.Scene();
-
-const camera =
-new THREE.PerspectiveCamera(
-  75,
-  window.innerWidth/window.innerHeight,
-  0.1,
-  1000
-);
-
-const renderer =
-new THREE.WebGLRenderer({
-  antialias:true
-});
-
-renderer.setSize(
-  window.innerWidth,
-  window.innerHeight
-);
-
-document.body.appendChild(
-  renderer.domElement
-);
-
-/* TEXTURA PLANETA */
-
-const loader =
-new THREE.TextureLoader();
-
-const earthTexture =
-loader.load(
-"https://threejs.org/examples/textures/planets/earth_atmos_2048.jpg"
-);
-
-/* PLANETA */
-
-const geometry =
-new THREE.SphereGeometry(
-  2.5,
-  64,
-  64
-);
-
-const material =
-new THREE.MeshStandardMaterial({
-  map:earthTexture
-});
-
-const earth =
-new THREE.Mesh(
-  geometry,
-  material
-);
-
-scene.add(earth);
-
-/* POSIÇÃO */
-
-earth.position.x = 4;
-earth.position.y = 1;
-
-/* LUZ */
-
-const light =
-new THREE.PointLight(
-  0xffffff,
-  2
-);
-
-light.position.set(
-  5,
-  5,
-  5
-);
-
-scene.add(light);
-
-const ambient =
-new THREE.AmbientLight(
-  0xffffff,
-  0.5
-);
-
-scene.add(ambient);
-
-/* CAMERA */
-
-camera.position.z = 8;
-
-/* ESTRELAS */
-
-const starsGeometry =
-new THREE.BufferGeometry();
-
-const starsCount = 10000;
-
-const positions = [];
-
-for(let i=0;i<starsCount;i++){
-
-  positions.push(
-    (Math.random()-0.5)*200
-  );
-
-  positions.push(
-    (Math.random()-0.5)*200
-  );
-
-  positions.push(
-    (Math.random()-0.5)*200
-  );
-
-}
-
-starsGeometry.setAttribute(
-  "position",
-  new THREE.Float32BufferAttribute(
-    positions,
-    3
-  )
-);
-
-const starsMaterial =
-new THREE.PointsMaterial({
-  color:0xffffff,
-  size:0.08
-});
-
-const stars =
-new THREE.Points(
-  starsGeometry,
-  starsMaterial
-);
-
-scene.add(stars);
-
-/* ANIMAÇÃO */
-
-function animate(){
-
-  requestAnimationFrame(
-    animate
-  );
-
-  earth.rotation.y += 0.002;
-
-  stars.rotation.y += 0.0003;
-
-  renderer.render(
-    scene,
-    camera
-  );
-
-}
-
-animate();
-
-/* RESPONSIVO */
-
-window.addEventListener(
-  "resize",
-  ()=>{
-
-    camera.aspect =
-    window.innerWidth/window.innerHeight;
-
-    camera.updateProjectionMatrix();
-
-    renderer.setSize(
-      window.innerWidth,
-      window.innerHeight
-    );
-
-  }
-);
-
-</script>
+<script src="script.js"></script>
 
 </body>
 </html>
-

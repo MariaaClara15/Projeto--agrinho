@@ -1,148 +1,93 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: Arial, sans-serif;
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial;
 }
 
-body {
-  background: linear-gradient(to right, #d4fc79, #96e6a1);
-  color: #1b4332;
-}
-
-header {
-  text-align: center;
-  padding: 30px;
-  background-color: #2d6a4f;
-  color: white;
-}
-
-header h1 {
-  font-size: 3rem;
-}
-
-main {
-  width: 90%;
-  max-width: 900px;
-  margin: 30px auto;
-}
-
-.card {
-  background: white;
-  padding: 25px;
-  margin-bottom: 20px;
-  border-radius: 15px;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-}
-
-.card h2 {
-  margin-bottom: 15px;
-  color: #2d6a4f;
-}
-
-button {
-  padding: 12px 20px;
-  margin-top: 10px;
-  margin-right: 10px;
-  border: none;
-  border-radius: 10px;
-  background-color: #2d6a4f;
-  color: white;
-  cursor: pointer;
-  transition: 0.3s;
-}
-
-button:hover {
-  background-color: #40916c;
-  transform: scale(1.05);
-}
-
-input {
-  width: 100%;
-  padding: 10px;
-  margin-top: 10px;
-  border-radius: 10px;
-  border: 1px solid #999;
-}
-
-#resultadoQuiz,
-#resultadoAgua,
-#dica,
-#desafio {
-  margin-top: 15px;
-  font-weight: bold;
-}
-
-footer {
-  text-align: center;
-  padding: 20px;
-  background-color: #2d6a4f;
-  color: white;
-}
-.avatares {
-  display: flex;
-  gap: 15px;
-  margin-top: 15px;
-}
-
-.avatar-opcao {
-  width: 80px;
-  height: 80px;
-  border-radius: 50%;
-  cursor: pointer;
-  transition: 0.3s;
-  border: 3px solid transparent;
-}
-
-.avatar-opcao:hover {
-  transform: scale(1.1);
-  border-color: #2d6a4f;
-}
-
-.avatar-principal {
-  width: 150px;
-  margin-top: 20px;
-  border-radius: 50%;
-  border: 5px solid #2d6a4f;
-}
 body{
-    margin:0;
-    height:100vh;
-    font-family:Arial, sans-serif;
-
-    background:
-        linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.7)),
-        url('https://images.unsplash.com/photo-1448375240586-882707db888b');
-
-    background-size:cover;
-    background-position:center;
-    background-repeat:no-repeat;
-
-    color:white;
-}
-.login-box{
-    width:320px;
-    padding:30px;
-
-    background:rgba(255,255,255,0.08);
-    backdrop-filter:blur(12px);
-
-    border:1px solid rgba(255,255,255,0.15);
-    border-radius:20px;
-
-    box-shadow:0 0 25px rgba(0,255,100,0.2);
-
-    position:absolute;
-    top:50%;
-    left:50%;
-    transform:translate(-50%, -50%);
-}
-background: linear-gradient(
-  180deg,
-  #081C15,
-  #0F172A,
-  #1B4332
+background:linear-gradient(
+135deg,
+#2e7d32,
+#81c784
 );
-backdrop-filter: blur(12px);
-background: rgba(255,255,255,0.08);
-border: 1px solid rgba(255,255,255,0.1);
+min-height:100vh;
+padding:20px;
+}
+
+#login{
+background:white;
+max-width:500px;
+margin:auto;
+padding:30px;
+border-radius:20px;
+text-align:center;
+box-shadow:0 0 20px rgba(0,0,0,.2);
+}
+
+input{
+width:100%;
+padding:12px;
+margin:10px 0;
+border-radius:10px;
+border:none;
+background:#f1f1f1;
+}
+
+button{
+padding:12px 20px;
+border:none;
+border-radius:10px;
+background:#2e7d32;
+color:white;
+cursor:pointer;
+margin:5px;
+}
+
+button:hover{
+transform:scale(1.05);
+}
+
+.avatares{
+display:flex;
+justify-content:center;
+gap:20px;
+margin:20px;
+}
+
+.avatares img{
+width:80px;
+cursor:pointer;
+border-radius:50%;
+}
+
+.selecionado{
+border:5px solid green;
+}
+
+header{
+background:white;
+padding:20px;
+border-radius:20px;
+text-align:center;
+margin-bottom:20px;
+}
+
+#avatarUsuario{
+width:100px;
+border-radius:50%;
+}
+
+.cards{
+display:grid;
+grid-template-columns:
+repeat(auto-fit,minmax(250px,1fr));
+gap:20px;
+}
+
+.card{
+background:white;
+padding:20px;
+border-radius:20px;
+box-shadow:0 0 10px rgba(0,0,0,.2);
+}
