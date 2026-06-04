@@ -13,9 +13,9 @@ body{
 
 background:linear-gradient(
 135deg,
-#1b5e20,
-#4caf50,
-#81c784
+#4cf357,
+#066809,
+#51e258
 );
 
 background-size:400% 400%;
@@ -162,7 +162,7 @@ transform:scale(1.15);
 
 .selecionado{
 
-border:5px solid #4caf50;
+border:5px solid #6bf036;
 
 }
 
