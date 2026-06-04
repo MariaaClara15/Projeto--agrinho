@@ -417,3 +417,16 @@ font-size:1rem;
 line-height:1.6;
 
 }
+/* CARD DO ECOBOT */
+
+.mascote{
+background: linear-gradient(
+135deg,
+#2e7d32,
+#66bb6a
+);
+
+padding:15px;
+
+border-radius:15px;
+}
